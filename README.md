@@ -1,10 +1,12 @@
 # CPU-Virtual-16-bits
 Simulador de una CPU simple de 16-bits  
-
-/bin contiene el ejecutable (cpu.exe)  
-/doc contiene el diagrama en que está basado el código  
-/include contiene los headers públicos  
-/src incluye el código fuente y la interfaz gráfica  
+  
+Directorios:
+  
+> /bin contiene el ejecutable (cpu.exe)  
+> /doc contiene el diagrama en que está basado el código  
+> /include contiene los headers públicos  
+> /src incluye el código fuente y la interfaz gráfica  
   
 Instrucciones de uso:  
   
