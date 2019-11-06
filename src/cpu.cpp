@@ -30,6 +30,7 @@ Cpu::Cpu()
 	Carry = 0;
     Adec = 0;
     Bdec = 0;
+    Cdec = 0;
 	Sdec = NO_OP;
 }
 
@@ -48,22 +49,22 @@ void Cpu::actualizar()
 	actualizarOutputLo();
 	actualizarOutputHi();
 	actualizarCarry();
-	actualizarCdec();
+    actualizarCdec();
 }
 
 void Cpu::actualizarCdec()
 {
 	if (Sdec==NO_OP or Sdec==L_SHIFT or Sdec==R_SHIFT) {
-		bool Cbin[16+1];
+		bool Cbin[17];
 		
 		Cbin[0] = Carry;
 		for (int i=0; i<8; i++) {
 			Cbin[i+1] = Chi[i];
 			Cbin[i+9] = Clo[i];
 		}
-		Cdec = btod(Cbin,16+1);
+        Cdec = btod(Cbin,17);
 	}
-    if (Sdec==RESTA) {
+    else if (Sdec==RESTA) {
         bool Cbin[8];
 
         for (int i=0; i<8; i++)
@@ -75,19 +76,19 @@ void Cpu::actualizarCdec()
         }
         // Caso A < B
         else if (Carry==1) {
-            // Signo + reversión del complemento 2
+            // Signo + reversion del complemento 2
             Cdec = (-1) * (256 - btod(Cbin,8));
         }
     }
 	else {
-		bool Cbin[8+1];
+		bool Cbin[9];
 		
 		Cbin[0] = Carry;
 		for (int i=0; i<8; i++)
 			Cbin[i+1] = Clo[i];
 			
-		Cdec = btod(Cbin,8+1);
-	}
+		Cdec = btod(Cbin,9);
+    }
 }
 
 void Cpu::actualizarInput()
